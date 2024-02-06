@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 15px;
+            min-height: 100vh;
+            background-color: rgb(228, 228, 228);
+        }
+        article{
+            width: 300px;
+            height: 400px;
+            border-radius: 10px;
+            background-color: white;
+            padding: 25px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        div{
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background-color: #5f5ffd;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        img{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: -4px;
+            bottom: -4px;
+        }
+        header{
+            font-size: larger;
+        }
+        aside{
+            font-size: large;
+            color: #5f5ffd;
+        }
+        p{
+            color: rgb(99, 99, 99);
+            margin: 0;
+            font-size: medium;
+        }
+    </style>
+</head>
+<body>
+    <button id="nuevo-empleado">nuevo</button>
+    <article>
+        <div>
+            <img src="yo.png" alt="">
+        </div>
+        <header> Nombre </header>
+        <aside> Puesto </aside>
+        <p> Descripcion</p>
+    </article>
+
+    <script>
+        class Empleado{
+            titulo;
+            profesion;
+            descripcion;
+            id=0;
+
+            crearElemento(){
+                let elemento = {
+                    article: document.createElement("article"),
+                    header: document.createElement("header"),
+                    aside: document.createElement("aside"),
+                    p: document.createElement("p")
+                };
+
+                return elemento;
+            }
+            
+            nuevaCard(titulo, profesion, descripcion){
+                
+                let elemento = this.crearElemento();
+
+                elemento.header.innerText = titulo;
+                elemento.aside.innerText = profesion;
+                elemento.p.innerText = descripcion;
+
+                elemento.article.appendChild(elemento.header);
+                elemento.article.appendChild(elemento.aside);
+                elemento.article.appendChild(elemento.p);
+
+                elemento.article.id = "card" + this.id;
+                this.id++;
+                document.body.appendChild(elemento.article);
+            }
+
+            modificarElemento(id){
+                let card = document.getElementById("card" + id);
+
+                card.style.backgroundColor = "red"
+            }
+        }
+
+        let agregar = document.getElementById("nuevo-empleado");
+        let german = new Empleado();
+        agregar.addEventListener('click', function(){
+            german.nuevaCard("German Canteros", "Programador", "Soy junior");
+        });
+    </script>
+</body>
+</html>
