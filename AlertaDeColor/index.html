@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerta de color</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="color">Color</h1>
+    <button onclick="cambiarColorDeFondo()">Cambiar color</button>
+
+    <script>
+        function colorAleatorio(){
+            let caracteres = "0123456789ABCDEF";
+    
+            let numero;
+            let colorAleatorio = "#";
+            for (let index = 0; index < 6; index++) {
+                numero = (Math.random())*16;
+                numero = Math.floor(numero);
+    
+                colorAleatorio += caracteres[numero];
+            }
+            return colorAleatorio;
+        }
+        function cambiarColorDeFondo(){
+            colorActual = document.getElementById("color");
+
+            colorActual.innerText = colorAleatorio();
+            document.body.style.backgroundColor = colorAleatorio();
+        }
+    </script>
+</body>
+</html>

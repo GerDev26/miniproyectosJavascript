@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #1c1c1c;
+            color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Contador</h2>
+    <h1 id="numeros">4</h1>
+    <div class="buttonContainer">
+        <button id="decrementar"">Decrementar</button>
+        <button id="resetear"">Resetear</button>
+        <button id="incrementar">Incrementar</button>
+    </div>
+    <script>
+        let numeros = document.getElementById("numeros");
+        let decrementar = document.getElementById("decrementar");
+        let resetear = document.getElementById("resetear");
+        let incrementar = document.getElementById("incrementar");
+        valor = 3
+        numeros.innerText = valor;
+
+        function sumar(){
+            valor++;
+            console.log(valor);
+            numeros.innerText = valor;
+        }
+        function restar(){
+            valor--;
+            numeros.innerText = valor;
+        }
+        function reset(){
+            valor = 0
+            numeros.innerText = valor;
+        }
+
+        decrementar.addEventListener('click', restar);
+        resetear.addEventListener('click', reset);
+        incrementar.addEventListener('click', sumar);
+    </script>
+</body>
+</html>
