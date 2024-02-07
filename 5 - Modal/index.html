@@ -7,43 +7,89 @@
 </head>
 <style>
     body{
-        width: 100%;
-        min-height: 100vh;
+        width: 100vw;
+        height: 100vh;
         display: flex;
         margin: 0;
         padding: 0;
         justify-content: center;
         align-items: center;
-        background-color: #e0e0e0;
+        background-color: #1c1c1c;
     }
-    #show-modal{
+    #open-modal{
         height: 40px;
         border: 3px solid #4a4aff;
         border-radius: 5px;
-        background-color: white;
+        background-color: #1c1c1c;
         color: #4a4aff;
         font-weight: bold;
     }
-    #show-modal:hover{
+    #open-modal:hover{
         background-color: #4a4aff;
-        color: white;
+        color: #1c1c1c;
     }
     #modal{
         position: absolute;
+        bottom: 1%;
+        opacity: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 5vw;
         width: 85vw;
-        height: 65vh;
+        height: 75vh;
         border-radius: 10px;
-        background-color: white;
+        color: #e0e0e0;
+        background-color: black;
+        z-index: -1;
+        transition: all 200ms ease-in-out;
+    }
+    #close-modal{
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 </style>
 <body>
-    <button id="show-modal">MOSTRAR MODAL</button>
+    <button id="open-modal">MOSTRAR MODAL</button>
     <div id="modal">
+        <button id="close-modal">Cerrar</button>
         <h1>Soy un modal</h1>
     </div>
+    <script>
+        class Modal{
+            element;
+            openButton;
+            closeButton
+
+            constructor(element, openButton, closeButton){
+                this.element = document.getElementById(element);
+                this.openButton = document.getElementById(openButton);
+                this.closeButton = document.getElementById(closeButton);
+            }
+            openModal(){
+                this.element.style.opacity = 1
+                this.element.style.zIndex = 1
+                this.element.style.bottom = "50%"
+                this.element.style.transform = "translateY(50%)"
+            }
+            closeModal(){
+                this.element.style.opacity = 0
+                this.element.style.zIndex = -1
+                this.element.style.zIndex = -1
+                this.element.style.bottom = "1%"
+                this.element.style.transform = "none"
+            }
+        }
+
+        let homeModal = new Modal("modal", "open-modal", "close-modal");
+
+        homeModal.openButton.addEventListener('click', function(){
+            homeModal.openModal();
+        });
+        homeModal.closeButton.addEventListener('click', function(){
+            homeModal.closeModal();
+        });
+    </script>
 </body>
 </html>
