@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: #e0e0e0;
+        margin: 0;
+        padding: 0;
+    }
+    #nav-movil{
+        position: relative;
+        width: 100vw;
+        height: 0vh;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+        position: absolute;
+        bottom: 0;
+        background-color: #1c1c1c8c;
+        color: white;
+        transition: all 250ms ease-in-out;
+    }
+    .squareButton{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 30px;
+        height: 30px;
+        padding: 0px;
+        margin: 2vh 2vw;
+        border: none;
+        background-color: transparent;
+        color: blue;
+        transition: all 150ms ease-in-out;
+    }
+    .squareButton svg{
+        width: 100%;
+        height: auto;
+    }
+    #close-nav{
+        opacity: 0;
+        z-index: -1;
+        color: white;
+    }
+</style>
+<body>
+    
+    <button id="show-nav" class="squareButton">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+    </button>
+
+    <button id="close-nav" class="squareButton">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>  
+    </button>
+    
+    <nav id="nav-movil">
+        <ul>
+            <li> Home </li>
+            <li> Galeria </li>
+            <li> Sobre mi </li>
+            <li> Catalogo </li>
+            <li> Contactanos </li>
+        </ul>
+    </nav>
+    <script>
+        class NavMovil{
+            nav;
+            closeButton;
+            showButton;
+
+            constructor(nav, showbutton, closebutton){
+                this.nav = document.getElementById(nav);
+                this.closeButton = document.getElementById(closebutton);
+                this.showButton = document.getElementById(showbutton);
+            }
+            mostrar(){
+                this.nav.style.height = "100vh";
+                this.showButton.style.opacity = 0
+                this.closeButton.style.opacity = 1
+                this.closeButton.style.zIndex = 5
+
+            }
+            ocultar(){
+                this.nav.style.height = "0vh";
+                this.showButton.style.opacity = 1
+                this.closeButton.style.opacity = 0
+                this.closeButton.style.zIndex = -1
+            }
+        }
+        
+        let navbar = new NavMovil("nav-movil", "show-nav", "close-nav");
+    
+        navbar.showButton.addEventListener('click', function(){
+            navbar.mostrar();
+        });
+        navbar.closeButton.addEventListener('click', function(){
+            navbar.ocultar();
+        });
+    </script>
+</body>
+</html>
