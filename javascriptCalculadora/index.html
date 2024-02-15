@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            margin: 0;
+        }
+        body{
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .calculadora{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 3fr;
+            grid-template-areas: 
+            "pantalla pantalla"
+            "numeros operaciones"
+            "numeros operaciones";
+            background-color: brown;
+            min-height: 450px;
+            min-width: 400px;
+            gap: 20px;
+            padding: 20px;
+        }
+        .botones{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .numeros{
+            background-color: red;
+            grid-area: numeros;
+        }
+        .operaciones{
+            background-color: green;
+            grid-area: operaciones;
+            display: grid;
+            grid-template-rows: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .pantalla{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: blue;
+            grid-area: pantalla;
+            text-align: center;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <div class="pantalla">
+            
+        </div>
+        <div class="numeros botones ">
+            <button class="ingresar-caracter">1</button>
+            <button class="ingresar-caracter">2</button>
+            <button class="ingresar-caracter">3</button>
+            <button class="ingresar-caracter">4</button>
+            <button class="ingresar-caracter">5</button>
+            <button class="ingresar-caracter">6</button>
+            <button class="ingresar-caracter">7</button>
+            <button class="ingresar-caracter">8</button>
+            <button class="ingresar-caracter">9</button>
+            <button class="ingresar-caracter">0</button>
+            <button class="ingresar-caracter">00</button>
+            <button class="ingresar-caracter">.</button>
+        </div>
+        <div class="operaciones botones ">
+            <button class="ingresar-caracter">%</button>
+            <button id="borrar-caracter">CE</button>
+            <button class="ingresar-caracter">X</button>
+            <button class="ingresar-caracter">-</button>
+            <button class="ingresar-caracter">+</button>
+            <button class="ingresar-caracter">/</button>
+            <button id="operar">=</button>
+        </div>
+    </div>
+    <script>
+
+        class calculadora{
+            
+        }
+        function sumar(a, b){
+            return a + b;
+        }
+        function restar(a, b){
+            return a / b;
+        }
+        function multiplicar(a, b){
+            return a / b;
+        }
+        function dividir(a, b){
+            return a / b;
+        }
+        function operar(a, b, callback){
+            return callback(a, b);
+        }
+
+        let caracteres = document.querySelectorAll(".ingresar-caracter");
+        let borrar = document.getElementById('borrar-caracter');
+        let pantalla = document.querySelector(".pantalla")
+
+        caracteres = Array.from(caracteres);
+
+        caracteres.forEach(caracter => {
+            caracter.addEventListener('click', () => {
+                let textoAnterior = pantalla.textContent;
+                pantalla.textContent = textoAnterior + caracter.textContent;
+            })
+        });
+
+        borrar.addEventListener('click', () => {
+            console.log(pantalla.textContent);
+            pantalla.textContent = pantalla.textContent.slice(0, -1);
+        })
+    </script>
+</body>
+</html>

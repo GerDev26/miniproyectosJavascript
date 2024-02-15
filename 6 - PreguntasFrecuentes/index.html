@@ -31,10 +31,10 @@
         position: relative;
         width: 50vw;
         min-height: 70vh;
-        background-color: red;
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 15px;
     }
     .item{
         display: flex;
@@ -42,6 +42,7 @@
         width: 100%;
     }
     .container-question{
+        border-radius: 10px;
         box-sizing: border-box;
         padding: 0px 20px;
         width: 100%;
@@ -53,18 +54,20 @@
         justify-content: space-between;
         align-items: center;
     }
+    .container-question-abierto{
+        border-radius: 10px 10px 0px 0px;
+    }
     .icon{
         width: 20px;
         height: auto;
     }
-    .minus-icon{
-        display: none;
-    }
     
     
     .container-answer{
+        border-radius: 0px 0px 10px 10px;
         box-sizing: border-box;
-        background-color: blue;
+        background-color: white;
+        color: #1c1c1c;
         min-height: 80px;
         width: 100%;
         padding: 20px;
@@ -81,26 +84,26 @@
         <h1 id="tittle">Preguntas Frecuentes</h1>
         <div class="item">
             <div class="container-question">
-                <p class="question">Sos gay?</p>
+                <p class="question">Sosasdasdy?</p>
                 <svg class="plus-icon icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
-                <svg class="minus-icon icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <svg class="minus-icon icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                 </svg>
             </div>
-            <div class="container-answer">
+            <div class="container-answer hidden">
                 <p class="answer">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo porro excepturi dolor omnis rem hic minima facilis magni praesentium fuga? At tempore natus ut magni eos accusamus aspernatur voluptates fuga!</p>
             </div>
         </div>
 
         <div class="item">
             <div class="container-question">
-                <p class="question">Sos gay?</p>
+                <p class="question">Sasdasdasday?</p>
                 <svg class="plus-icon icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
-                <svg class="minus-icon icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <svg class="minus-icon icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                 </svg>
             </div>
@@ -111,17 +114,35 @@
     </div>
     
     <script>
+        class FAQ{
+            items;
+            answerContainers;
+            questionContainers;
+            minusIcons;
+            plusIcons;
 
-        let items = document.getElementsByClassName("item");
-        index = 0;
-        items = Array.from(items);
-        
-        items.forEach(function(element) {
-            element.addEventListener('click', function(){
-                console.log("hola")
-            })
-        });
+            constructor(items, questionContainers, minusIcons, plusIcons, answerContainers){
+                this.items = document.querySelectorAll(`.${items}`);
+                this.questionContainers = document.querySelectorAll(`.${questionContainers}`);
+                this.minusIcons = document.querySelectorAll(`.${minusIcons}`);
+                this.plusIcons = document.querySelectorAll(`.${plusIcons}`);
+                this.answerContainers = document.querySelectorAll(`.${answerContainers}`);
+            }
 
+            iniciar(){
+                this.items.forEach((item, index) => {
+                    item.addEventListener('click', () => {
+                        this.answerContainers[index].classList.toggle("hidden");
+                        this.minusIcons[index].classList.toggle("hidden");
+                        this.plusIcons[index].classList.toggle("hidden");
+                        this.questionContainers[index].classList.toggle("container-question-abierto")
+                    });
+                });
+            }
+        }
+
+        let preguntas = new FAQ("item", "container-question", "minus-icon", "plus-icon", "container-answer");
+        preguntas.iniciar();
     </script>
 </body>
 </html>
